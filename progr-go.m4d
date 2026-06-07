@@ -1,0 +1,7 @@
+# go
+
+The blank identifier is represented by the underscore character "_".
+
+Declaration = ConstDecl | TypeDecl | VarDecl
+
+TopLevelDecl = Declaration | FunctionDecl | MethodDecl

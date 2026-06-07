@@ -1,0 +1,17 @@
+go mod init
+go mod tidy
+
+systemctl --user enable --now podman.socket
+export DOCKER_HOST=unix:///run/user/1000/podman/podman.sock
+export KO_DOCKER_REPO=ko.local
+
+ko build .
+
+podman run -p 8000:8000 ko.local/go-http-server-b786d0593a960543e6a6b5c75b1e587f
+podman pod rm go-http-server
+podman pod create --name go-http-server --publish 8000:8000
+podman run -d --pod pod-go-http-server --name go-http-server ko.local/go-http-server-b786d0593a960543e6a6b5c75b1e587f
+podman generate kube pod-go-http-server > pod-go-http-server.yaml
+podman pod rm -f pod-go-http-server
+podman kube play --replace pod-go-http-server.yaml
+podman kube down pod-go-http-server.yaml

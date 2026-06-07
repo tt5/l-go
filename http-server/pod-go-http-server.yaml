@@ -1,0 +1,23 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-5.8.2
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.kubernetes.cri-o.SandboxID/go-http-server: f5699ee6ffcbe3ceab76257fd2470bd35779d6d91f061e50170e96df13cae570
+  creationTimestamp: "2026-06-07T15:42:53Z"
+  labels:
+    app: pod-go-http-server
+  name: pod-go-http-server
+spec:
+  containers:
+  - image: ko.local/go-http-server-b786d0593a960543e6a6b5c75b1e587f:latest
+    name: go-http-server
+    ports:
+    - containerPort: 8000
+      hostPort: 8000
+    securityContext:
+      runAsNonRoot: true
+
