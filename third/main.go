@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strings"
 	"text/template"
@@ -11,6 +12,13 @@ func main() {
 			"upper": strings.ToUpper,
 	}
 
+	myMap := make(map[string]int)
+	myMap["x"] = 0
+	myMap["y"] = 0
+
+	for k, v:= range myMap {
+		fmt.Println("key: ", k, "value: ", v)
+	}
 
 
 	const nameTmpl = `{{define "name"}} {{upper .Name}} {{end}}`
